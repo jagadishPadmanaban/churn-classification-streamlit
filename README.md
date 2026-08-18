@@ -118,7 +118,7 @@ streamlit run app.py
 
 Deployed on Streamlit Community Cloud:
 
-**Live App Link:** `<ADD_YOUR_STREAMLIT_APP_LINK_HERE_AFTER_DEPLOYING>`
+**Live App Link:** https://churn-classification-app-46jab8n7ydyibpt97ftsrj.streamlit.app/
 
 Deployment steps:
 1. Push this repository to GitHub.
