@@ -1,5 +1,14 @@
+# Virtual environments
 .venv/
+.venv314/
+venv/
+
+# Python-generated files
 __pycache__/
-*.pyc
+*.py[cod]
+
+# Streamlit local secrets
+.streamlit/secrets.toml
+
+# OS-generated files
 .DS_Store
-.streamlit/
