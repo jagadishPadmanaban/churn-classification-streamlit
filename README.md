@@ -39,7 +39,7 @@ explored on demand.
 
 ## c. GitHub Repository Link
 
-`<ADD_YOUR_GITHUB_REPO_LINK_HERE_AFTER_PUSHING>`
+https://github.com/jagadishPadmanaban/churn-classification-streamlit
 
 ## d. Models Used
 
