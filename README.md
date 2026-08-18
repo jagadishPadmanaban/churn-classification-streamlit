@@ -43,7 +43,7 @@ https://github.com/jagadishPadmanaban/churn-classification-streamlit
 
 ## d. Models Used
 
-All 6 models were trained on the same preprocessed dataset and evaluated on
+All 5 models were trained on the same preprocessed dataset and evaluated on
 the same held-out 20% test split.
 
 | ML Model Name | Accuracy | AUC | Precision | Recall | F1 | MCC |
@@ -66,7 +66,7 @@ which writes the same numbers to `model/metrics.json`.)*
 | kNN | Middling performance, close to the Decision Tree. Distance-based classification is diluted by the large number of one-hot encoded sparse dimensions (curse of dimensionality), so it can't separate classes as cleanly as Logistic Regression. |
 | Naive Bayes | Lowest Accuracy and Precision, but by far the highest Recall (0.8262). The conditional-independence assumption is clearly violated (e.g., `InternetService`, `OnlineSecurity`, `TechSupport` are correlated), which biases it toward over-predicting the churn class — useful if the business cost of missing a churner is high, at the cost of many false alarms. |
 | Random Forest (Ensemble) | Ties Logistic Regression for the highest AUC (0.836) and has the best Precision, but its Recall is the lowest of all 5 models — it is the most conservative about flagging a customer as "will churn." Good if false positives (unnecessary retention offers) are costly. |
-| **Overall Winner for your dataset?** | **Logistic Regression** — best balance of all six metrics (highest Accuracy, F1 and MCC, tied for highest AUC) despite being the simplest model, making it the most practical default for this dataset. |
+| **Overall Winner for your dataset?** | **Logistic Regression** — best balance across the reported metrics (highest Accuracy, F1 and MCC, tied for highest AUC) despite being the simplest model, making it the most practical default for this dataset. |
 
 ## Project Structure
 
@@ -104,8 +104,10 @@ streamlit run app.py
 
 ## Streamlit App Features
 
-- **Dataset upload (CSV):** upload your own test CSV (same schema as
-  `test_data.csv`) or use the bundled sample.
+- **Dataset upload (CSV or Excel):** upload your own test CSV/XLSX/XLS (same
+  schema as `test_data.csv`) or use the bundled sample. Blank `TotalCharges`
+  rows are removed automatically, matching how they were excluded during
+  training.
 - **Model selection dropdown:** choose any of the 5 trained models.
 - **Evaluation metrics:** Accuracy, AUC, Precision, Recall, F1, MCC computed
   live on the uploaded data (when the true `Churn` column is present).
