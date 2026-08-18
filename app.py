@@ -90,6 +90,21 @@ else:
     st.info("Upload a CSV or check 'Use bundled sample test_data.csv' to continue.")
     st.stop()
 
+if "customerID" in data.columns:
+    data = data.drop(columns=["customerID"])
+
+if "TotalCharges" in data.columns and not pd.api.types.is_numeric_dtype(
+    data["TotalCharges"]
+):
+    data["TotalCharges"] = pd.to_numeric(data["TotalCharges"], errors="coerce")
+    n_blank = data["TotalCharges"].isna().sum()
+    if n_blank:
+        st.warning(
+            f"Dropped {n_blank} row(s) with a blank 'TotalCharges' "
+            "(matches how these were excluded during training)."
+        )
+        data = data.dropna(subset=["TotalCharges"]).reset_index(drop=True)
+
 st.subheader("Preview of test data")
 st.dataframe(data.head(10), width="stretch")
 
