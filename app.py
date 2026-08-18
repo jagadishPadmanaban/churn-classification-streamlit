@@ -74,11 +74,16 @@ st.write(
 with st.sidebar:
     st.header("Controls")
     model_name = st.selectbox("Select a model", list(MODEL_FILES.keys()))
-    uploaded_file = st.file_uploader("Upload test data (CSV)", type=["csv"])
+    uploaded_file = st.file_uploader(
+        "Upload test data (CSV or Excel)", type=["csv", "xlsx", "xls"]
+    )
     use_sample = st.checkbox("Use bundled sample test_data.csv", value=uploaded_file is None)
 
 if uploaded_file is not None:
-    data = pd.read_csv(uploaded_file)
+    if uploaded_file.name.lower().endswith((".xlsx", ".xls")):
+        data = pd.read_excel(uploaded_file)
+    else:
+        data = pd.read_csv(uploaded_file)
 elif use_sample:
     data = pd.read_csv(DEFAULT_TEST_DATA)
 else:
